@@ -115,10 +115,12 @@ impl From<Source> for String {
 /// let converted: Candle = my_candle.into();
 /// println!("{:?}", converted);
 /// ```
-#[derive(
-	Debug, Clone, Copy, Default, PartialOrd, rkyv::Archive, rkyv::Deserialize, rkyv::Serialize,
+#[derive(Debug, Clone, Copy, Default, PartialOrd)]
+#[cfg_attr(
+	feature = "rkyv",
+	derive(rkyv::Archive, rkyv::Deserialize, rkyv::Serialize)
 )]
-#[archive(check_bytes)]
+#[cfg_attr(feature = "rkyv", archive_attr(derive(CheckBytes)))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Candle {
 	/// *Open* value of the candle
