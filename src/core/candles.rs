@@ -120,7 +120,7 @@ impl From<Source> for String {
 	feature = "rkyv",
 	derive(rkyv::Archive, rkyv::Deserialize, rkyv::Serialize)
 )]
-#[cfg_attr(feature = "rkyv", archive_attr(derive(CheckBytes)))]
+#[cfg_attr(feature = "rkyv", archive_attr(derive(rkyv::CheckBytes)))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Candle {
 	/// *Open* value of the candle
