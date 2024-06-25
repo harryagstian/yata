@@ -116,16 +116,12 @@ impl From<Source> for String {
 /// println!("{:?}", converted);
 /// ```
 #[derive(Debug, Clone, Copy, Default, PartialOrd)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(
 	feature = "rkyv",
-	derive(
-		rkyv::Archive,
-		rkyv::Deserialize,
-		rkyv::Serialize,
-		rkyv::bytecheck::CheckBytes
-	)
+	derive(rkyv::Archive, rkyv::Deserialize, rkyv::Serialize)
 )]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[cfg_attr(feature = "rkyv", archive(check_bytes))]
 pub struct Candle {
 	/// *Open* value of the candle
 	pub open: ValueType,
