@@ -1,9 +1,6 @@
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Serialize};
 
-#[cfg(feature = "rkyv")]
-use rkyv::bytecheck;
-
 use std::convert::TryFrom;
 use std::str::FromStr;
 
@@ -121,7 +118,12 @@ impl From<Source> for String {
 #[derive(Debug, Clone, Copy, Default, PartialOrd)]
 #[cfg_attr(
 	feature = "rkyv",
-	derive(rkyv::Archive, rkyv::Deserialize, rkyv::Serialize, rkyv::CheckBytes)
+	derive(
+		rkyv::Archive,
+		rkyv::Deserialize,
+		rkyv::Serialize,
+		rkyv::bytecheck::CheckBytes
+	)
 )]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Candle {
