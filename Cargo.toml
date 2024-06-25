@@ -24,6 +24,7 @@ include = [
 ]
 
 [dependencies]
+rkyv = { version = "0.7.44", features = ["validation"] }
 serde = { version = "1", features = ["derive"], optional = true }
 
 [features]
